@@ -11,7 +11,7 @@ namespace CarouselView
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainViewForms();
         }
 
         protected override void OnStart()
