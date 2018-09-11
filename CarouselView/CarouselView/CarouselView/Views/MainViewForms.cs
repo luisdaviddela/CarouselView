@@ -7,7 +7,7 @@ namespace CarouselView
     class MainViewForms:ContentPage
     {
         private Point? _dimensions;
-        
+        private Grid _baseLayout;
         private DateTime _timerStart;
 
         // Content variable definitions
@@ -62,34 +62,18 @@ namespace CarouselView
             }
         }
 
-        private View GenerateLayout()
-        {
-            box3 = new ManualCarouselView { Pages = new List<Layout>() }; // Double-Width Live-Tile
-
-            SetupBox3(box3);
-            
-            Content = new ContentView
-            {
-                Content = box3
-            };
-            return new ScrollView
-            {
-                Orientation = ScrollOrientation.Vertical,
-                Content = Content,
-            };
-        }
         
         private void SetupBox3(ManualCarouselView box)
         {
-            Label lb1 = new Label
+            Image lb1 = new Image
             {
-                TextColor = Color.Black,
-                Text = "Title 4"
+                HeightRequest = 60,
+                Source = "ongone.png"
             };
-            Label lb2 = new Label
+            Image lb2 = new Image
             {
-                TextColor = Color.White,
-                Text = "Title 5"
+                HeightRequest = 60,
+                Source = "ong.jpg"
             };
             ContentView pg1 = new ContentView
             {
@@ -109,6 +93,57 @@ namespace CarouselView
             box.Initialise(0);
         }
 
+        private View GenerateLayout()
+        {
+            //--------------------Forms
+            var Userlbl = new Label()
+            {
+                Text = "Introduce tu nombre"
+            };
+            var Userlblcon = new Label()
+            {
+                Text = "Introduce tu Contraseña"
+            };
+            var entrylbl = new Entry()
+            {
+                Placeholder = "Nombre completo"
+            };
+            var entrylblCon = new Entry()
+            {
+                IsPassword= true,
+                Text="Contraseña"
+            };
+
+            var buttonCon = new Button()
+            {
+                CornerRadius=30,
+                Text ="Iniciar Sesión",
+                BackgroundColor = Color.FromHex("#3498db")
+            };
+            //--------------------
+            _baseLayout = new Grid()
+            {
+                RowDefinitions = new RowDefinitionCollection {
+                    new RowDefinition { Height = new GridLength(2, GridUnitType.Auto) },
+                }
+            };
+            
+            box3 = new ManualCarouselView { Pages = new List<Layout>() }; // Double-Width Live-Tile
+            SetupBox3(box3);
+            _baseLayout.Children.Add(box3, 0,0);
+            return new ScrollView
+            {
+                Orientation = ScrollOrientation.Vertical,
+                Content = new StackLayout
+                {
+                    Padding = 20,
+                    Spacing = 10,
+                    HorizontalOptions= LayoutOptions.CenterAndExpand,
+                    Children = { _baseLayout, Userlbl , entrylbl,
+                    Userlblcon,entrylblCon,buttonCon}
+                },
+            };
+        }
         
     }
 }
