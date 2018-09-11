@@ -5,10 +5,6 @@
              x:Class="CarouselView.XamlView">
     <ContentPage.Content>
         <StackLayout>
-            <local:MainViewForms HeightRequest="50"></local:MainViewForms>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
